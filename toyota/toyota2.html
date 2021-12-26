@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/reset CSS.css">
+    <style>
+        h1{
+            text-align: center;
+            padding-top: 50px;
+            font-size: 60px;
+            font-weight: bolder;
+        }
+        .line{
+            width: 40px;
+            margin: auto;
+            margin-top: 20px;
+            border-top: 5px black solid;
+        }
+        nav{
+            text-align: center;
+            font-size: 22px;
+            padding:30px ;
+        }
+        nav a{
+            padding: 5px 40px;
+            text-decoration: none;
+            color: #000;
+            border: 2px black dotted;
+            border-bottom:3px rgb(177, 9, 9) solid;
+            margin-left:10px ;
+            margin-right: 10px;
+        }
+        .box{
+            width: 1200px;
+            margin: auto;
+            padding-top: 200px;
+            padding-bottom: 200px;
+            flex-wrap: wrap;
+        }
+        .carpic{
+            width: 700px;
+            height: 390px;
+            margin: auto;
+            position: relative;
+            
+        }
+        .carpic img{
+            width: 100%;
+            height: 100%;
+            position: relative;
+            z-index: 1;
+        }
+        .carpic .introduction{
+            position: absolute;
+            top: -110px;
+            left: -200px;
+            z-index: 2;
+        }
+        .introduction_title{
+            background-color: crimson;
+            display: flex;
+            color: white;
+            
+        }
+        .introduction_title .number{
+            transform: rotate(90deg);
+            font-size: 100px;
+            padding-top: 10px;
+        }
+        .introduction_title .title{
+            font-size: 50px;
+            line-height:100px ;
+            
+        }
+        .introduction_text{
+            width: 320px;
+            background-color: black;
+            color: white;
+            padding:20px 20px 40px ;
+            line-height: 40px;
+        }
+        .introduction_text h2{
+            font-size: 25px;
+            font-weight:bolder;
+        }
+        .introduction_text p{
+            font-size: 20px;
+            text-align: justify;
+        }
+        .carpic .replenish{
+            width: 652px;
+            background-color: #ccc;
+            padding: 1em 1em 1em 2em;
+            position: absolute;
+            top: 360px;
+            left: -100px;
+            line-height: 22px;
+            z-index: 2;
+        }
+        .replenish .innovation{
+            color: red;
+            position: relative;
+            font-size: 20px;
+            font-weight: bolder;
+            margin-bottom: 5px;
+        }
+        .replenish .innovation::after{
+            content: '';
+            position: absolute;
+            width: 425px;
+            border-top:3px red solid;
+            top: 8px;
+            margin-left: 10px;
+        }
+        .replenish h2{
+            color: white;
+            display: inline-block;
+            background-color: black;
+            padding: 2px 8px;
+            border-radius: 5px
+        }
+        .replenish p{
+            padding-left: 1.5em;
+            text-indent: -0.6em;
+            margin: 5px;
+        }
+        .replenish p::before{
+            content: ' • ';
+            color: red;
+        }
+        .carpic .shadow{
+            width: 440px;
+            height: 260px;
+            position: absolute;
+            background-color: rgb(235, 233, 233);
+            top: -70px;
+            right: -100px;
+            z-index: 0;
+        }
+        .carpic .youtube{
+            width: 75px;
+            height: 48px;
+            position: absolute;
+            right: -10px;
+            top:200px
+        }
+        .carpic_even{
+            width: 700px;
+            height: 390px;
+            margin: auto;
+            position: relative;
+            right: 200px;
+        }
+        .carpic_even img{
+            width: 100%;
+            height: 100%;
+            position: relative;
+            z-index: 1;
+        }
+        .carpic_even .introduction_even{
+            position: absolute;
+            top: -110px;
+            right: -270px;
+            z-index: 2;
+        }
+        .introduction_even .introduction_title{
+            flex-direction: row-reverse;
+        }
+        .carpic_even .replenish{
+            width: 652px;
+            background-color: #ccc;
+            padding: 1em 1em 1em 2em;
+            position: absolute;
+            bottom: -170px;
+            right: -270px;
+            line-height: 22px;
+            z-index: 2;
+        }
+        .carpic_even .shadow{
+            width:445px ;
+            height: 370px;
+            background-color: rgb(235, 233, 233);
+            position: absolute;
+            top: -45px;
+            right: -70px;
+            z-index: 0;
+        }
+        .carpic_even .youtube{
+            width: 75px;
+            height: 48px;
+            position: absolute;
+            left: -10px;
+            top:200px
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <h1>五大優勢</h1>
+            <div class="line"></div>
+        </div>
+        <nav>
+            <a href="#funny">操控樂趣</a>
+            <a href="#save">安全守護</a>
+            <a href="#comfortable">乘坐舒適</a>
+            <a href="#people">以人為本</a>
+            <a href="#proud">引以為傲</a>
+        </nav>
+    </header>
+    <div class="box">
+        <div id="funny" class="carpic">
+            <a href="#"><img src="/toyota1-2.jpg" alt="車子圖片"></a>
+            <div class="introduction">
+                <div class="introduction_title">
+                    <div class="number">
+                        <p>01</p>
+                    </div>
+                    <div class="title">
+                        <p>操控樂趣</p>
+                    </div>
+                </div>
+                <div class="introduction_text">
+                    <h2>人人滿意的駕駛題驗</h2>
+                    <p>透過最佳中亮分配，實現平順起步，直線穩定加速，過彎同時保持車身平穩，帶給駕駛更靈敏的道路回饋，享受隨心馳騁的行駛快感。</p>
+                </div>
+            </div>
+            <div class="replenish">
+                <section class="innovation">因為我們做了這些革新</section>
+                <h2>低重心設計</h2>
+                <p>透過低重心設機，不僅呈現更低伏的外觀，更能減少車身側傾，保持高速行駛穩定性。</p>
+                <h2>車體剛性強化</h2>
+                <p>車身結構採用超高強度鋼材，提高車輛穩定性，同時藉由雷射強化焊接技術，大幅增加焊點數量，提升車身抗扭剛性，強化駕馭穩定性及安全性。</p>
+                <h2>四輪獨立懸吊</h2>
+                <p>搭載全新四輪獨立懸吊設定，透過懸吊的高承載強度，保持輪胎抓地力，同時兼顧轉向靈敏度與清晰路感回饋，提升駕駛樂趣。</p>
+            </div>
+            <div class="shadow"></div>
+            <div class="youtube">
+                <a href="#"><img src="/Snipaste_youtube.png" alt="youtube"></a>
+            </div>
+        </div>
+    </div>
+    <div class="box">
+        <div id="save" class="carpic_even">
+            <a href="#"><img src="/toyota2.jpeg" alt="安全守護圖片"></a>
+            <div class="introduction_even">
+                <div class="introduction_title">
+                    <div class="number">
+                        <p>02</p>
+                    </div>
+                    <div class="title">
+                        <p>安全守護</p>
+                    </div>
+                </div>
+                <div class="introduction_text">
+                    <h2>行車更安心的高剛性車體</h2>
+                    <p>您的愛車會妥善保護您，強悍穩固的車身可使您安全無虞。世界級的安全功能讓您輕鬆自如享受旅程、毫無後顧之憂。</p>
+                </div>
+            </div>
+            <div class="replenish">
+                <section class="innovation">因為我們做了這些革新</section>
+                <h2>主動安全</h2>
+                <p>以先進的TSS系統，主動偵測路況，補助駕駛判斷路況並維持行車安全。</p>
+                <h2>被動安全</h2>
+                <p>堅固的高剛性車體，使用熱沖壓材料的高強度抗扭鋼板，強化座艙對意外事故的保護力。</p>
+            </div>
+            <div class="shadow"></div>
+            <div class="youtube">
+                <a href="#"><img src="/Snipaste_youtube.png" alt="youtube"></a>
+            </div>
+        </div>
+    </div>
+    <div class="box">
+        <div id="comfortable" class="carpic">
+            <a href="#"><img src="/toyota3.jpg" alt="乘坐舒適圖片"></a>
+            <div class="introduction">
+                <div class="introduction_title">
+                    <div class="number">
+                        <p>03</p>
+                    </div>
+                    <div class="title">
+                        <p>乘坐舒適</p>
+                    </div>
+                </div>
+                <div class="introduction_text">
+                    <h2>令人放鬆舒適的車室空間</h2>
+                    <p>車室空間設計著重人體工學，透過方向盤，踏板等位置優化，追求更舒適的駕駛位置，並以新型座椅設計，提高座椅包覆性致力實現長途駕駛不疲勞的舒適駕馭體驗。</p>
+                </div>
+            </div>
+            <div class="replenish">
+                <section class="innovation">因為我們做了這些革新</section>
+                <h2>駕駛位置最佳化</h2>
+                <p>針對駕駛位置進行徹底的修改，讓駕馭者如同握手般自然且舒適地操控方向盤。</p>
+                <h2>駕馭視野佳</h2>
+                <p>考量駕駛坐進車內高度，透過前擋風玻璃位置的調整，達到盲區極小化，使駕駛視野更開闊，同步提升駕馭安全。</p>
+                <h2>更寧靜的車室</h2>
+                <p>採用最新三層結構的隔音材料，與引擎、變速箱的零件改革，將座艙的震動抑制在最小限度，題共乘客舒適安靜的感受。</p>
+            </div>
+            <div class="shadow"></div>
+            <div class="youtube">
+                <a href="#"><img src="/Snipaste_youtube.png" alt="youtube"></a>
+            </div>
+        </div>
+    </div>
+    <div class="box">
+        <div id="people" class="carpic_even">
+            <a href="#"><img src="/toyota4.jpg" alt="以人為本圖片"></a>
+            <div class="introduction_even">
+                <div class="introduction_title">
+                    <div class="number">
+                        <p>04</p>
+                    </div>
+                    <div class="title">
+                        <p>以人為本</p>
+                    </div>
+                </div>
+                <div class="introduction_text">
+                    <h2>使用者導向的貼心設計</h2>
+                    <p>藉由高度人性化的介面整合、傳遞車輛資訊，豐富日常駕駛體驗。從提升油耗表現到行李廂空間最適化，均細心考量，更加貼近使用者真正所需與習慣，並給予及時回應。
+                    </p>
+                </div>
+            </div>
+            <div class="replenish">
+                <section class="innovation">因為我們做了這些革新</section>
+                <h2>優異油耗表現</h2>
+                <p>以AURIS為例，更強勁的高校引擎將熱效率提升至40%，達到世界級水準，屢屢突破燃油效率新境界。</p>
+                <h2>行李箱空間最適化</h2>
+                <p>以PRIUS為例，透過將電池位置移到後座下方，讓行李廂擁有更大的空間。</p>
+            </div>
+            <div class="shadow"></div>
+            <div class="youtube">
+                <a href="#"><img src="/Snipaste_youtube.png" alt="youtube"></a>
+            </div>
+        </div>
+    </div>
+    <div class="box">
+        <div id="proud" class="carpic">
+            <a href="#"><img src="/toyota5.jpg" alt="引以為傲圖片"></a>
+            <div class="introduction">
+                <div class="introduction_title">
+                    <div class="number">
+                        <p>05</p>
+                    </div>
+                    <div class="title">
+                        <p>引以為傲</p>
+                    </div>
+                </div>
+                <div class="introduction_text">
+                    <h2>極具吸引力的精心設計</h2>
+                    <p>TNGA車款擁有讓人忍不住回頭的新潮外觀、讓駕駛充滿自信的駕馭快感!不僅讓車主能展現個人風格，也能讓擁有者都能引以為傲。</p>
+                </div>
+            </div>
+            <div class="replenish">
+                <section class="innovation">因為我們做了這些革新</section>
+                <h2>設計概念</h2>
+                <p>TNGA低重心設計，不僅呈現更低伏運動化外觀，更講究高品質內裝的一致性。</p>
+                <h2>環保概念</h2>
+                <p>為了對環境保護盡一份心力，我們全力提升傳統引擎、變速箱與油電複合的動力效能。</p>
+            </div>
+            <div class="shadow"></div>
+            <div class="youtube">
+                <a href="#"><img src="/Snipaste_youtube.png" alt="youtube"></a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
