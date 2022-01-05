@@ -1,0 +1,260 @@
+.container{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.title{
+    width: 1200px;
+    margin: auto;
+    display: flex;
+    /* padding-top: 30px;
+    
+    position: fixed;
+    top: 0; */
+    
+}
+.mailon img{
+    display: inline-block;
+}
+nav{
+    display: flex;
+    /* align-items: center; */
+    margin-left: auto;
+    display: none;
+    line-height:54px ;
+}
+nav a{
+    padding: 20px;
+    font-size: 18px;
+    text-decoration:none ;
+}
+nav a:link{
+    color: rgb(165, 161, 161)
+    
+}
+nav .sub{
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin-left: 80px;
+}
+.col_introduce{
+    display: flex;
+    /* flex-direction: column; */
+    /* justify-content: center; */
+    align-items: center;
+}
+.item_introduce{
+    display: flex;
+    flex-direction: column;
+    
+}
+.item_introduce h2{
+    font-size: 70px;
+    padding: 10px;
+}
+.item_introduce p{
+    font-size: 20px;
+    padding: 10px;
+    line-height: 25px;
+}
+.btn{
+    display: flex;
+    margin-top: 30px;
+}
+.btn .more{
+    background-color: rgb(52, 221, 52);
+    padding: 10px 30px;
+    margin: 0 30px 0px 0px ;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+.row_page2{
+    flex-direction: row-reverse;
+}
+.item_page2 h2{
+    font-size: 55px;
+}
+@media screen and (min-width: 768px){
+    nav{
+        display: inline-block;
+    }
+    
+}
+.services_text{
+    font-size: 40px;
+    line-height: 50px;
+}
+.col_services{
+    padding: 20px;
+}
+.col_services .item_services h3{
+    font-size: 25px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+.col_services .item_services p{
+    font-size: 20px;
+    margin-bottom: 50px;
+}
+.col_services .item_services .services_a a:link{
+    text-decoration: none;
+    color: rgb(27, 27, 27);
+}
+.col_services .item_services .services_a a:hover{
+    color: rgb(52, 221, 52); 
+}
+.item .common{
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px 15px;
+}
+.item .btn a:link{
+    color: black;
+    text-decoration: none;
+}
+
+.container_bg{
+    background-color: rgb(72, 72, 245);
+    color: white;
+}
+.col_projects{
+    padding: 15px;
+    margin-bottom:10 px;
+}
+.item_projects{
+    background-color: #3f81ff;
+    border-radius: 10px;
+    padding: 40px;
+    
+}
+.item_projects span{
+    font-size: 56px;
+}
+.item_projects p{
+    font-size: 14px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.row_center{
+    align-items: center;
+}
+.item_txt h2{
+    font-size: 42px;
+    margin-bottom: 30px;
+}
+.item_txt p{
+    font-size: 25px;
+    line-height: 30px;
+    margin-bottom: 40px;
+}
+.projects_a a{
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 10px 15px;
+    color: white;
+    text-decoration: none;
+}
+.item_steps{
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+.col_steps .pic img{
+    width: 100%;
+    vertical-align:middle;
+}
+.col_steps{
+    display: flex;
+    /* align-content: center; */
+    align-items: center;
+}
+.row_steps_1 .col-3{
+    margin-left: 16.666666%;
+}
+.row_steps_2 .col-3{
+    order: 1;
+}
+.row_steps_2 .col-1{
+    margin-left: 25%;
+}
+.row_steps_3 .col_steps_3_1{
+    margin-left: 16.666666%;
+}
+.row_steps_4 .col_steps_4_1{
+    order: 1;
+}
+.row_steps_4 .col-1{
+    margin-left: 25%;
+}
+.row_steps_5 .col-3{
+    margin-left: 16.666666%;
+}
+/* --------------------------------------- */
+.row_ourteam_title{
+    justify-content: space-between;
+}
+.item_ourteam{
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+.pic_ourteam{
+    position: relative;
+}
+.pic_ourteam img{
+    width: 100%;
+    vertical-align: top;
+}
+.item_ourteam_text{
+    /* padding: 40px 20px; */
+    position: absolute;
+    background-color: rgb(52, 221, 52);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: 0.5s;
+    opacity: 0;
+}
+.item_ourteam_text p{
+    font-size: 40px;
+    padding: 40px 10px;
+}
+.item_ourteam_text a{
+    display: block;
+    /* padding: 20px; */
+    margin: 120px 0px 0px 10px;
+}
+.pic_ourteam:hover .item_ourteam_text{
+    opacity: 1;
+}
+.row_signup h2{
+    font-size: 40px;
+}
+.row_signup input{
+    display: block;
+    width: 70%;
+    margin: 20px 0;
+    line-height: 30px;
+    padding: 0 10px;
+}
+.row_signup textarea{
+    padding: 0 10px;
+    resize:inherit;
+}
+.row_subscribe .col{
+    display: flex;
+    justify-content: center;
+}
+.row_subscribe h2{
+    font-size: 40px;
+    padding: 60px 0;
+}
+.row_subscribe input {
+    width: 80%;
+    font-size: 15px;
+    line-height: 40px;
+    padding: 0 10px;
+    
+}
