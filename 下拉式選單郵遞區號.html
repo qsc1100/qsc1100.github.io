@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>select/options下拉式選單</h1>
+    <select name="city" id="city"></select>
+    <select name="district" id="district"></select>
+    <input type="submit" value="提交資料">
+
+    <script>
+        const taiwanUrl = 'https://raw.githubusercontent.com/qsc1100/FileStorage/main/%E5%8F%B0%E7%81%A3%E9%83%B5%E9%81%9E%E5%8D%80%E8%99%9F'
+        let cityArray = []
+        let districtArray = []
+
+        //DOM
+        const citySelect = document.querySelector('#city')
+        const districtSelect = document.querySelector('#district')
+        const submitBtn = document.querySelector('input')
+        //window.onload
+        window.onload = function(){
+            getFetchData()
+
+            citySelect.onchange = function(){
+                const selectedCity = citySelect.value
+                districtArray = [''].concat(cityArray.find(x=>x.CityName == selectedCity).AreaList.map(x=>`${x.ZipCode}-${x.AreaName}`))
+                console.log(districtArray)
+                setDistrictSelect()
+                checkUI()
+            }
+            districtSelect.onchange = function(){
+                checkUI()
+            }
+        }
+        //function
+        function getFetchData(){
+            fetch(taiwanUrl)
+                .then(res =>res.json())
+                .then(data =>{
+                    
+                    //仿造資料
+                    cityArray =[{ CityName:'',AreaList:[] }].concat(data)
+                    districtArray = ['']
+                    
+                    setCitySelect()
+                    setDistrictSelect()
+                    checkUI()
+                })
+                .catch(ex => {console.warn(ex)})
+        }
+        function setCitySelect(){
+            //citySelect
+            citySelect.innerHTML = ''
+            cityArray.forEach(city=>{
+                let option = document.createElement('option')
+                option.innerText = city.CityName == ''?'--請選擇城市--' : city.CityName
+                option.value = city.CityName
+                citySelect.appendChild(option)
+            })
+        }
+        function setDistrictSelect(){
+            //districtSelect
+            districtSelect.innerHTML = ''
+            districtArray.forEach(district =>{
+                let option = document.createElement('option')
+                option.innerText = district == ''? '--請選擇區域--':district
+                option.value = district
+                districtSelect.appendChild(option)
+            })
+        }
+        function checkUI(){
+            if(citySelect.value ==''){
+                districtSelect.setAttribute('disabled','true')
+                submitBtn.setAttribute('disabled','true')
+            }else{
+                districtSelect.removeAttribute('disabled')
+            }
+            if(districtSelect.value ==''){
+                submitBtn.setAttribute('disabled','true')
+            }else{
+                submitBtn.removeAttribute('disabled')
+            }
+        }
+
+    </script>
+</body>
+</html>
