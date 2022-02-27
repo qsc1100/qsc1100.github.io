@@ -174,12 +174,20 @@
                     <h4>${x.sarea}${x.sna}</h4>
                     <p>總共數量${x.tot}</p>
                 `)
+                marker.addEventListener('click',function(){
+                    tableBody.innerHTML = ""
+                    let tr = document.createElement('tr')
+                    let td = document.createElement('td')
+                    td.innerText = x.sna
+                    let tdd = document.createElement('td')
+                    tdd.innerText = x.tot
+                    tr.append(td,tdd)
+                    tableBody.appendChild(tr)
+                })
             markers.addLayer(marker)
             })
         map.addLayer(markers)
         }
-
-
         //自己做一個groupBy
         Array.prototype.groupBy = function(prop){
             return this.reduce(function(groups,item){
