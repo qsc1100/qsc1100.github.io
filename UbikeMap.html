@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+
+    <!-- map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    <title>Map</title>
+    <style>
+        /* 地圖必須設定高度才能顯示 */
+        .container-fluid>.row {
+            height: 100vh;
+        }
+        #map {
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row py-3 ">
+            <div class="col-6">
+                <div id="map"></div>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="country">區域</label>
+                        <select id="country" class="form-control">
+                            <!-- option -->
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <h2 class="w-100 text-center"><strong></strong>台北各區域Ubike資訊</h2>
+                    <div class="col-12">
+                        <table class="table table-bordered table-striped text-center">
+                            <thead>
+                                <tr>
+                                    <th>地點</th>
+                                    <th>數量</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- data -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Axios -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.25.0/axios.min.js"
+        integrity="sha512-/Q6t3CASm04EliI1QyIDAA/nDo9R8FQ/BULoUFyN4n/BDdyIxeH7u++Z+eobdmr11gG5D/6nPFyDlnisDwhpYA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <script>
+        //宣告
+        let map
+        //台灣行政區域經緯度資料
+        let areaDataRequest=axios.get('https://raw.githubusercontent.com/Hsuanin1214/FileStorage/main/%E5%8F%B0%E7%81%A3%E8%A1%8C%E6%94%BF%E5%9C%B0%E5%8D%80')
+        //台北Ubike資料
+        let taipeiUbikeRequest = axios.get('https://raw.githubusercontent.com/JingYi1213/FileStorage/main/bike.json')
+
+        let UbikeData //Ubike資料
+        let areaData //行政區經緯度資料
+        let markers=L.markerClusterGroup()//地圖marker叢集群組
+
+        //DOM
+        const countrySelect = document.querySelector("#country")
+        const areaText = document.querySelector('strong')
+        const tableBody = document.querySelector('tbody')
+        //Window.onload
+        window.onload = function () {
+            setMap()
+            Promise.all([areaDataRequest,taipeiUbikeRequest])
+                .then(res =>{
+                    let [areaRes,UbikeRes] = res
+                    UbikeData =UbikeRes.data.map(x => {
+                        return{
+                            sna : x.sna.substring(11),
+                            sarea : x.sarea,
+                            sbi : x.sbi,
+                            tot : x.tot,
+                            lat : x.lat,
+                            lng : x.lng
+                        }
+                    })
+                    areaData = areaRes.data.filter(x => x.City == "台北市")
+                    creatOption()
+                    setMarker()
+                    console.log(areaData)
+                })
+        }
+        //function
+        function setMap() {
+            //初始化地圖
+            //官方語法L.map('map是放在html哪一個ID的div',是個物件一開始的地圖中心點是哪個經緯度,跟縮放)
+            map = L.map('map', {
+                //經緯度
+                center: [25.03416068163684, 121.56454962636319],
+                //縮放程度
+                zoom: 10
+            })
+            //設定圖資
+            //初始化地圖 某個類型例如:衛星雲圖...
+            let osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+            //圖層來自 osmurl
+            let osm = new L.TileLayer(osmUrl, { minZoom: 8, maxZoom: 19 })
+            //將osm加到map
+            map.addLayer(osm)
+        }
+        function creatOption(){
+            let optiosAll = []
+            optiosAll = ['請選擇'].concat(areaData.map(x => x.District))
+            optiosAll.forEach(x=>{
+                let option = document.createElement('option')
+                option.innerText = x
+                //option.value = x =='請選擇'? '': x
+                countrySelect.appendChild(option)
+            })
+            countrySelect.onchange = function(){
+                if(countrySelect.value != ''){
+                    let country = areaData.find(x =>x.District == countrySelect.value)
+                    map.setView([country.Lat,country.Lng],14)
+                    
+                    //先抓資料
+                    //先分組，用區域分組
+                    let sareaObj = UbikeData.groupBy('sarea')
+                    console.log(sareaObj)
+                    //再分站名
+                    let stationArr = sareaObj[countrySelect.value]
+                    console.log(stationArr)
+                    //用站別做出Tr Td
+                    stationArr.forEach(station =>{
+                        let tr = document.createElement('tr')
+                        let td = document.createElement('td')
+                        td.innerText = station.sna
+                        let tdd = document.createElement('td')
+                        tdd.innerText = station.tot
+                        tr.appendChild(td)
+                        tr.appendChild(tdd)
+                        tableBody.appendChild(tr)
+                    })
+                }
+            }
+        }
+        function setMarker(){
+            if(markers)markers.clearLayers()
+            UbikeData.forEach(x=>{
+                let marker = L.marker([x.lat,x.lng])
+                marker.bindPopup(
+                    `
+                    <h4>${x.sarea}${x.sna}</h4>
+                    
+                `)
+            markers.addLayer(marker)
+            })
+        map.addLayer(markers)
+        }
+
+
+        //自己做一個groupBy
+        Array.prototype.groupBy = function(prop){
+            return this.reduce(function(groups,item){
+                const val = item[prop]
+                groups[val]=groups[val] || []
+                groups[val].push(item)
+                return groups
+            },{})
+        }
+        
+    </script>
+</body>
+
+</html>
